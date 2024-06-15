@@ -4,6 +4,7 @@ var cookieParser = require("cookie-parser");
 const bodyParser=require('body-parser');
 const session = require("express-session");
 // const passport=require('./src/helper/passport');
+const cors=require('cors');
 const { connect } = require("./src/config/db");
 
 var app = express();
@@ -21,6 +22,14 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204
+}));
+
+app.use(cors());
 
 // app.use(passport.initialize());
 // app.use(passport.session());
