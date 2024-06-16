@@ -20,7 +20,7 @@ const Header = () => {
                             <li><a href="/contact">Contact</a></li>
                             <li>
                                 <div className="header-icons">
-                                    <a className="shopping-cart" href="cart.html"><i className="fas fa-shopping-cart"></i></a>
+                                    <a className="login" href="/login"><img src='assets/img/login.png'></img></a>
                                     <a className="mobile-hide search-bar-icon" href="#"><i className="fas fa-search"></i></a>
                                 </div>
                             </li>

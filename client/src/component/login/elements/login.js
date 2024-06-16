@@ -61,8 +61,9 @@ const LoginForm = () => {
          <input type="password" name="password" value={formData.password} onChange={handleChange} required />
          </p>
         </div>
-        <button type="submit">Login</button>
+       <p> <button type="submit">Login</button></p>
       </form>
+      <p> <a href="/register"> <button >Sign in</button></a></p>
                 </div>
             </div>
         </div>
