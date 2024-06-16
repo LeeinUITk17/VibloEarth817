@@ -181,3 +181,4 @@ export const SearchArea=()=>{
 	</div>
 	)
 }
+

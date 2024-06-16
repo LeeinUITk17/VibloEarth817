@@ -12,6 +12,10 @@ const newSchema=new Schema({
         type:String,
         required:true,
     },
+    email:{
+        type:String,
+        default:"none",
+    },
     role:{
         type:String,
         default:"user",
