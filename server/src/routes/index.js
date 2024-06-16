@@ -6,6 +6,7 @@ const routes = [
     // { path: '/home', handler: require('./home') },
     // { path: '/blog',  handler: require('./blog') },
     { path: '/contact',  handler: require('./contact') },
+    { path: '/login',  handler: require('./login') },
 ];
 
 routes.forEach(route => {

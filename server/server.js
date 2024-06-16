@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const session = require("express-session");
 const cors = require('cors');
 const { connect } = require("./src/config/db");
+const passport=require('./src/helpers/passport');
 const path = require('path');
 
 var app = express();
@@ -21,6 +22,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(cors({
   origin: "http://localhost:3000",
