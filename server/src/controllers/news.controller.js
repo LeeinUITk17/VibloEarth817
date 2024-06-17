@@ -2,6 +2,7 @@ const {
     addItem,
     getItemById:getnewsbyid,
     updateItem,
+    getItems,
  }=require('../services/news.service')
  const {
     getuserbyid,
@@ -34,6 +35,16 @@ const {
             return res.send('comment added successfully');
         } catch (error) {
             console.error('Error processing comment:', error);
+            return res.send('An error occurred. Check server console for details.');
+        }
+       }
+
+       getnews=async(req,res)=>{
+        try {
+            const news = await getItems();
+            return res.json(news);
+        } catch (error) {
+            console.error('Error processing news:', error);
             return res.send('An error occurred. Check server console for details.');
         }
        }

@@ -20,4 +20,6 @@ cloudinaryHelper.fields([
 
 router.post('/comment',catchAsync(blogController.comment));
 
+router.get('/all',catchAsync(blogController.getnews));
+
 module.exports = router;

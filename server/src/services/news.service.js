@@ -4,19 +4,8 @@ const newsModel = require("../models/news.model");
 const addItem = async (body) => {
   await newsModel.create(body);
 };
-const getItems = async (status, keyword) => {
-    let query = {};
-    if (status === 'all') {
-      query = {};
-    } else if (status) {
-      query.status = status;
-    }
-    if (keyword) {
-      query.$or = [
-        { name: new RegExp(keyword, 'i') },
-      ];
-    }
-    return await newsModel.find(query);
+const getItems = async () => {
+    return await newsModel.find();
   };
 
 const getItemById = async (id) => {
