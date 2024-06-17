@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Homepage from './component/home/index';
 import Blogpage from './component/blog/index';
 import Detailpage from './component/blog/detail';
+import Postpage from './component/blog/post';
 import Contactpage from './component/contact/index';
 import Loginpage from './component/login/index';
 import RegisterForm from './component/login/form';
@@ -23,6 +24,7 @@ root.render(
           <Route path="/home" element={<Homepage />} />
           <Route path="/news" element={<Blogpage />} />
           <Route path="/news/detail" element={<Detailpage />} />
+          <Route path="/news/post" element={<Postpage />} />
           <Route path="/contact" element={<Contactpage />} />
           <Route path="/login" element={<Loginpage />} />
           <Route path="/register" element={<RegisterForm />} />

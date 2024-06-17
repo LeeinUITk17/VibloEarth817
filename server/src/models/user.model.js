@@ -8,6 +8,10 @@ const newSchema=new Schema({
          type:String,
          required:true,
     },
+    name:{
+      type:String,
+      default:"Mr.Sunday",  
+    },
     password:{
         type:String,
         required:true,
