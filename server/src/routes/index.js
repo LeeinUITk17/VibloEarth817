@@ -4,9 +4,10 @@ const router = express.Router();
 // Setting layout and handling routes
 const routes = [
     // { path: '/home', handler: require('./home') },
-    // { path: '/blog',  handler: require('./blog') },
+    { path: '/blog',  handler: require('./blog') },
     { path: '/contact',  handler: require('./contact') },
     { path: '/login',  handler: require('./login') },
+    { path: '/auth',  handler: require('./auth') },
 ];
 
 routes.forEach(route => {

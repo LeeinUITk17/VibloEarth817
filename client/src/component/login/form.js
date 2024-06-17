@@ -38,7 +38,7 @@ const Registerpage=()=>{
         <>
         <Preloader />
           <RegisterForm/>
-          {/* <Logout/> */}
+          <Logout/>
           <Footer/>
           <Copyright/>
         </>

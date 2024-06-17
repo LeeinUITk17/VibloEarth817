@@ -1,6 +1,8 @@
 import Hero from './hero';
 import { SearchArea } from '../../child.component';
+
 const Header = () => {
+    
    return (
     <>
     <div className="top-header-area" id="sticker">

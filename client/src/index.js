@@ -10,21 +10,25 @@ import Contactpage from './component/contact/index';
 import Loginpage from './component/login/index';
 import RegisterForm from './component/login/form';
 
+import { UserProvider } from './context/UserContext';
+
 const root = createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/home" element={<Homepage />} />
-        <Route path="/news" element={<Blogpage />} />
-        <Route path="/news/detail" element={<Detailpage />} />
-        <Route path="/contact" element={<Contactpage />} />
-        <Route path="/login" element={<Loginpage />} />
-        <Route path="/register" element={<RegisterForm />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/home" element={<Homepage />} />
+          <Route path="/news" element={<Blogpage />} />
+          <Route path="/news/detail" element={<Detailpage />} />
+          <Route path="/contact" element={<Contactpage />} />
+          <Route path="/login" element={<Loginpage />} />
+          <Route path="/register" element={<RegisterForm />} />
+        </Routes>
+      </Router>
+    </UserProvider>
   </React.StrictMode>
 );
 

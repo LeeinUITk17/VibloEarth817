@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
 const LoginForm = () => {
+
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -22,16 +22,13 @@ const LoginForm = () => {
         username: formData.username,
         password: formData.password
       }, {
-        withCredentials: true // Ensure cookies are sent with the request
+        withCredentials: true 
       });
-      console.log('Response:', response.data);
-      // Handle successful login (e.g., redirect or show success message)
+      console.log('Login Response:', response.data);
       alert('Login successful!');
-      // Optionally, redirect to another page
-      // history.push('/dashboard');
+      window.location.href = '/home';
     } catch (error) {
       console.error('Error:', error.response.data);
-      // Handle error (e.g., show error message)
       alert('Login failed. Please try again.');
     }
   };

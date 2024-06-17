@@ -1,4 +1,8 @@
+import React, { useContext } from 'react';
+import {UserContext} from '../../../context/UserContext';
 const Hero = () => {
+    const { user } = useContext(UserContext);
+    // const userRole = user ? user.role : 'Guest'; 
   return (
     <div className="hero-area hero-bg">
     <div className="container">
@@ -7,7 +11,7 @@ const Hero = () => {
                 <div className="hero-text">
                     <div className="hero-text-tablecell">
                         <p className="subtitle">Viblo Earth.817</p>
-                        <h1>Welcome home!</h1>
+                        <h1>Welcome home! {user ? JSON.stringify(user) : 'Guest'}</h1>
                         <div className="hero-btns">
                             <a href="/news" className="boxed-btn">News</a>
                             <a href="/contact" className="bordered-btn">Contact Us</a>
