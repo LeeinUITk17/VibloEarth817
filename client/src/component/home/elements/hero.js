@@ -11,7 +11,7 @@ const Hero = () => {
                 <div className="hero-text">
                     <div className="hero-text-tablecell">
                         <p className="subtitle">Viblo Earth.817</p>
-                        <h1>Welcome home! {user ? JSON.stringify(user) : 'Guest'}</h1>
+                        <h1>Welcome home! {user ? JSON.stringify(user.username) : 'Guest'}</h1>
                         <div className="hero-btns">
                             <a href="/news" className="boxed-btn">News</a>
                             <a href="/contact" className="bordered-btn">Contact Us</a>

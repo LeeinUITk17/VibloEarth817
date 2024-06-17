@@ -10,14 +10,15 @@ export const UserProvider = ({ children }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const token = Cookies.get('jwt');
-                if (token) {
+                // const token = Cookies.get('jwt');
+                // console.log('Token:', token);
+                // if (token) {
                     const response = await axios.get('http://localhost:8000/api/auth', {
                         withCredentials: true  // Ensure cookies are sent with the request
                     });
                     console.log('Response:', response.data);
                     setUser(response.data);
-                }
+                
             } catch (error) {
                 console.error('Error fetching user:', error);
             }
