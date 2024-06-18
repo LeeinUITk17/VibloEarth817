@@ -5,7 +5,8 @@ const RegisterForm = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    email: ''
+    email: '',
+     name: ''
   });
 
   const handleChange = (e) => {
@@ -27,13 +28,10 @@ const RegisterForm = () => {
         withCredentials: true // Ensure cookies are sent with the request
       });
       console.log('Response:', response.data);
-      // Handle successful registration (e.g., redirect or show success message)
       alert('Registration successful!');
-      // Optionally, redirect to another page
-      // history.push('/dashboard');
+      window.location.href = '/login'; 
     } catch (error) {
       console.error('Error:', error.response.data);
-      // Handle error (e.g., show error message)
       alert('Registration failed. Please try again.');
     }
   };
@@ -56,19 +54,23 @@ const RegisterForm = () => {
         <label>Username:</label>
         <input type="text" name="username" value={formData.username} onChange={handleChange} required />
         </p>
-        </div>
-        <div className='coupon-form-wrap'>
+      
          <p>
          <label>Password:</label>
          <input type="password" name="password" value={formData.password} onChange={handleChange} required />
          </p>
-        </div>
-        <div className='coupon-form-wrap'>
+       
+        <p>
+          <label>Your name:</label>
+          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+          </p>
+       
           <p>
           <label>Email:</label>
           <input type="email" name="email" value={formData.email} onChange={handleChange} required />
           </p>
         </div>
+        
         <button type="submit">Register</button>
       </form>
                    </div>

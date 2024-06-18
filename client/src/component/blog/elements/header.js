@@ -1,6 +1,25 @@
+import { useContext } from 'react';
+import React from 'react';
+import axios from 'axios';
 import Hero from './hero';
 import { SearchArea } from '../../child.component';
+import { UserContext } from '../../../context/UserContext';
 const Header = () => {
+    const { user } = useContext(UserContext);
+    const handleLogout = async () => {
+        try {
+          const response = await axios.get('http://localhost:8000/api/login/out', {
+            withCredentials: true // Ensure cookies are sent with the request
+          });
+          console.log('Logout Response:', response.data);
+          // Optionally handle success (e.g., redirect to login page)
+          window.location.href = '/home'; // Redirect to home page after logout
+        } catch (error) {
+          console.error('Logout Error:', error);
+          // Handle error (e.g., show error message)
+          alert('Logout failed. Please try again.');
+        }
+      };
    return (
     <>
     <div className="top-header-area" id="sticker">
@@ -15,12 +34,13 @@ const Header = () => {
                     </div>
                     <nav className="main-menu">
                         <ul>
-                            <li><a href="/home">Home</a></li>
+                            <li ><a href="/home">Home</a></li>
                             <li className="current-list-item"><a href="/news">News</a> </li>
                             <li><a href="/contact">Contact</a></li>
                             <li>
                                 <div className="header-icons">
-                                    <a className="shopping-cart" href="cart.html"><i className="fas fa-shopping-cart"></i></a>
+                                    
+                                    {user? <img src='assets/img/logout.png' onClick={handleLogout} className="boxed-btn"></img>:<a className="login" href="/login"><img src='assets/img/login.png'></img></a> }
                                     <a className="mobile-hide search-bar-icon" href="#"><i className="fas fa-search"></i></a>
                                 </div>
                             </li>

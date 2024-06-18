@@ -14,7 +14,8 @@ const Hero = () => {
                         <h1>Welcome home! {user ? JSON.stringify(user.name) : 'Guest'}</h1>
                         <div className="hero-btns">
                             <a href="/news" className="boxed-btn">News</a>
-                            <a href="/contact" className="bordered-btn">Contact Us</a>
+                            
+                            {user ? <a href="/news/post" className="bordered-btn">Create Post</a>: <a href="/contact" className="bordered-btn">Contact Us</a>}
                         </div>
                     </div>
                 </div>

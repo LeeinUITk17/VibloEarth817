@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import {Preloader,Footer,Copyright} from './../child.component';
 import RegisterForm from './elements/register';
-import Logout from './elements/logout';
 const Registerpage=()=>{  
     useEffect(() => {
         const loadScript = (src) => {
@@ -38,7 +37,6 @@ const Registerpage=()=>{
         <>
         <Preloader />
           <RegisterForm/>
-          <Logout/>
           <Footer/>
           <Copyright/>
         </>
