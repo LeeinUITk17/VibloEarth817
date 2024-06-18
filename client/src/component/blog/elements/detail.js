@@ -87,7 +87,7 @@ const Detail = () => {
         </div>
     </div>
 
-	<div className="comment-template">
+   {user?	<div className="comment-template">
                 <h4>Leave a comment</h4>
                 <p>If you have a comment, don't hesitate to send us your opinion.</p>
                 <form onSubmit={handleCommentSubmit}>
@@ -106,7 +106,10 @@ const Detail = () => {
 				 <input type="submit" value="Submit" />
 				 </p>
                 </form>
-              </div>
+              </div>:	<div className="comment-template">
+                <h4>Leave a comment</h4>
+                <p><a href='/login'>If you'd like to leave a comment, please log in to access this feature.</a></p>
+              </div>}
                         
 				</div>
 			</div>

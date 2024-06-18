@@ -10,6 +10,7 @@ import Postpage from './component/blog/post';
 import Contactpage from './component/contact/index';
 import Loginpage from './component/login/index';
 import RegisterForm from './component/login/form';
+import Profilepage from './component/profile/index';
 
 import { UserProvider } from './context/UserContext';
 import { BlogProvider} from './context/BlogContext';
@@ -30,6 +31,7 @@ root.render(
           <Route path="/contact" element={<Contactpage />} />
           <Route path="/login" element={<Loginpage />} />
           <Route path="/register" element={<RegisterForm />} />
+          <Route path="/profile" element={<Profilepage />} />
         </Routes>
       </Router>
       </BlogProvider>

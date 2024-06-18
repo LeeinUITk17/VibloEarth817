@@ -23,7 +23,8 @@ const RegisterForm = () => {
       const response = await axios.post('http://localhost:8000/api/login/add', {
         username: formData.username,
         password: formData.password,
-        email: formData.email
+        email: formData.email,
+        name: formData.name
       }, {
         withCredentials: true // Ensure cookies are sent with the request
       });
