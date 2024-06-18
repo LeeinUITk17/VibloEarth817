@@ -22,4 +22,6 @@ router.post('/comment',catchAsync(blogController.comment));
 
 router.get('/all',catchAsync(blogController.getnews));
 
+router.get('/detail/:id',catchAsync(blogController.getDetail));
+
 module.exports = router;

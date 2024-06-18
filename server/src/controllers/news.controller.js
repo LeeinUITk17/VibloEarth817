@@ -5,7 +5,7 @@ const {
     getItems,
  }=require('../services/news.service')
  const {
-    getuserbyid,
+    getauth,
  }=require('../services/user.service')
  const commentmodel=require('../models/comment.model');
  const cloudinary = require('cloudinary').v2;
@@ -30,9 +30,8 @@ const {
       comment=async(req,res)=>{
         try {
             console.log(req.body);
-            await commentmodel.create(req.body);
-            const auth = req.body.auth;
-            return res.send('comment added successfully');
+            const data=await commentmodel.create(req.body);
+            return res.send(data);
         } catch (error) {
             console.error('Error processing comment:', error);
             return res.send('An error occurred. Check server console for details.');
@@ -48,5 +47,28 @@ const {
             return res.send('An error occurred. Check server console for details.');
         }
        }
+       getDetail = async (req, res) => {
+        const { id } = req.params; 
+        if (!id) {
+            return res.send(false);
+        }  
+        try {
+            const data = await getnewsbyid(id);
+            if (!data) {
+              console.log('data not found');
+                return res.send(false)
+            }  
+            const author = await getauth(data.authorID);  
+            if (!author) {
+              console.log('author not found');
+                return res.send(false)
+            }
+            const comments=await commentmodel.find({newid:id}).exec();
+            return res.send({ data, author,comments });
+        } catch (error) {
+            console.error(error);
+            return res.send(false);
+        }
+    };
  }
  module.exports=new newsController();

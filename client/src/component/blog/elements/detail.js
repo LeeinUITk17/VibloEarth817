@@ -1,6 +1,59 @@
-import CommentBox from './commentbox';
-import CommentList from './commentlist';
-const Detail=()=>{
+import React, { useState, useEffect,useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import {BlogContext} from '../../../context/BlogContext';
+import { UserContext } from '../../../context/UserContext';
+const Detail = () => {
+	const { id } = useParams();
+	const [blog, setBlog] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const [comment, setComment] = useState('');
+	
+	const { blogs } = useContext(BlogContext);
+	const { user } = useContext(UserContext);
+  
+	useEffect(() => {
+	  const fetchBlogDetail = async () => {
+		try {
+		  const response = await axios.get(`http://localhost:8000/api/blog/detail/${id}`);
+		  setBlog(response.data);
+		  setLoading(false);
+		} catch (error) {
+		  setError(error);
+		  setLoading(false);
+		}
+	  };
+  
+	  fetchBlogDetail();
+	}, [id]);
+  
+	const handleCommentSubmit = async (e) => {
+	  e.preventDefault();
+	  const newComment = {
+		name: user ? user.name : 'Guest',
+		avatar: user ? user.avatar : 'https://res.cloudinary.com/dbonwxmgl/image/upload/v1717061277/xesgw0ilky3wbrj9xixd.jpg',
+		newid: blog.data._id,
+		comment: comment
+	  };
+  
+	  try {
+		const response = await axios.post(`http://localhost:8000/api/blog/comment`, newComment);
+		setBlog((prevBlog) => ({
+		  ...prevBlog,
+		  comments: [...prevBlog.comments, response.data]
+		}));
+		setComment('');
+	  } catch (error) {
+		setError(error);
+	  }
+	};
+  
+	if (loading) return <div>Loading...</div>;
+	if (error) return <div>Error loading blog details: {error.message}</div>;
+
+	
+
     return (
         <div className="mt-150 mb-150">
 		<div className="container">
@@ -8,21 +61,52 @@ const Detail=()=>{
 				<div className="col-lg-8">
 					<div className="single-article-section">
 						<div className="single-article-text">
-							<div className="single-artcile-bg"></div>
+							<div className="single-artcile-bg" style={{backgroundImage: `url(${blog.data.avatar})`}}></div>
 							<p className="blog-meta">
-								<span className="author"><i className="fas fa-user"></i> Admin</span>
-								<span className="date"><i className="fas fa-calendar"></i> 27 December, 2019</span>
+								<span className="author"><i className="fas fa-user"></i> {blog.author.name}</span>
+								<span className="date"><i className="fas fa-calendar"></i> {new Date(blog.data.createdAt).toISOString().split('T')[0]}</span>
 							</p>
-							<h2>Pomegranate can prevent heart disease</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint soluta, similique quidem fuga vel voluptates amet doloremque corrupti. Perferendis totam voluptates eius error fuga cupiditate dolorum? Adipisci mollitia quod labore aut natus nobis. Rerum perferendis, nobis hic adipisci vel inventore facilis rem illo, tenetur ipsa voluptate dolorem, cupiditate temporibus laudantium quidem recusandae expedita dicta cum eum. Quae laborum repellat a ut, voluptatum ipsa eum. Culpa fugiat minus laborum quia nam!</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, praesentium, dicta. Dolorum inventore molestias velit possimus, dolore labore aliquam aperiam architecto quo reprehenderit excepturi ipsum ipsam accusantium nobis ducimus laudantium.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum est aperiam voluptatum id cupiditate quae corporis ex. Molestias modi mollitia neque magni voluptatum, omnis repudiandae aliquam quae veniam error! Eligendi distinctio, ab eius iure atque ducimus id deleniti, vel alias sint similique perspiciatis saepe necessitatibus non eveniet, quo nisi soluta.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt beatae nemo quaerat, doloribus obcaecati odio!</p>
+							<h2>{blog.data.name}</h2>
+							<div dangerouslySetInnerHTML={{ __html: blog.data.content }} />
 						</div>
 
-                        <CommentList/>
+                        <div className="comments-list-wrap">
+        <h3 className="comment-count-title">Comment: {blog.comments?.length}</h3>
+        <div className="comment-list">
+			{blog.comments.map((comment) => (
+				<div className="single-comment-body">
+                <div className="comment-user-avater">
+				<img src={comment.avatar} alt="author_avatar" />
+                </div>
+                <div className="comment-text-body">
+                    <h4>{comment.name} <span className="comment-date">{new Date(comment.createdAt).toISOString().split('T')[0]}</span> </h4>
+                    <p>{comment.comment}.</p>
+                </div>
+            </div>
+              ))}
+        </div>
+    </div>
 
-                        <CommentBox/>
+	<div className="comment-template">
+                <h4>Leave a comment</h4>
+                <p>If you have a comment, don't hesitate to send us your opinion.</p>
+                <form onSubmit={handleCommentSubmit}>
+                 <p>
+				 <textarea
+                    name="comment"
+                    id="comment"
+                    cols="30"
+                    rows="10"
+                    placeholder="Your Message"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+				 </p>
+                 <p>
+				 <input type="submit" value="Submit" />
+				 </p>
+                </form>
+              </div>
                         
 				</div>
 			</div>
@@ -31,32 +115,16 @@ const Detail=()=>{
 						<div className="recent-posts">
 							<h4>Recent Posts</h4>
 							<ul>
-								<li><a href="single-news.html">You will vainly look for fruit on it in autumn.</a></li>
-								<li><a href="single-news.html">A man's worth has its season, like tomato.</a></li>
-								<li><a href="single-news.html">Good thoughts bear good fresh juicy fruit.</a></li>
-								<li><a href="single-news.html">Fall in love with the fresh orange</a></li>
-								<li><a href="single-news.html">Why the berries always look delecious</a></li>
-							</ul>
-						</div>
-						<div className="archive-posts">
-							<h4>Archive Posts</h4>
-							<ul>
-								<li><a href="single-news.html">JAN 2019 (5)</a></li>
-								<li><a href="single-news.html">FEB 2019 (3)</a></li>
-								<li><a href="single-news.html">MAY 2019 (4)</a></li>
-								<li><a href="single-news.html">SEP 2019 (4)</a></li>
-								<li><a href="single-news.html">DEC 2019 (3)</a></li>
-							</ul>
+							{blogs.slice(0, 5).map((blog) => (
+								<li><a href={`/news/detail/${blog._id}`}>{blog.name}</a></li>
+							))}
+								</ul>
 						</div>
 						<div className="tag-section">
 							<h4>Tags</h4>
 							<ul>
-								<li><a href="single-news.html">Apple</a></li>
-								<li><a href="single-news.html">Strawberry</a></li>
-								<li><a href="single-news.html">BErry</a></li>
-								<li><a href="single-news.html">Orange</a></li>
-								<li><a href="single-news.html">Lemon</a></li>
-								<li><a href="single-news.html">Banana</a></li>
+								<li><a href="single-news.html">Marine</a></li>
+								<li><a href="single-news.html">Pirates</a></li>
 							</ul>
 						</div>
 					</div>

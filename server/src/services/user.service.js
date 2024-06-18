@@ -25,10 +25,15 @@ const getStatusCounts = async () => {
     };
     return statusCounts;
   };
+
+  const getauth = async (id) => {
+    return await usermodel.findById(id).select('name avatar').exec();
+}
   module.exports={
         adduser,
         getuserbyid,
         deteleuser,
         updateuser,
         getStatusCounts,
+        getauth,
   }
