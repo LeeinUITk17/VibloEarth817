@@ -6,6 +6,7 @@ const passport = require('passport');
 class loginController{
     register = async (req, res, next) => {
         try {        
+            console.log(req.body);
            const user= await registerService(req.body);
         //    return res.render('login/updateimage',{id: user._id});
         return res.send('register success');

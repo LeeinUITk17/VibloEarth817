@@ -3,7 +3,7 @@ const router = express.Router();
 
 // Setting layout and handling routes
 const routes = [
-    // { path: '/home', handler: require('./home') },
+    { path: '/profile', handler: require('./profile') },
     { path: '/blog',  handler: require('./blog') },
     { path: '/contact',  handler: require('./contact') },
     { path: '/login',  handler: require('./login') },

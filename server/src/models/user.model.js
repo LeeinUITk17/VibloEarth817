@@ -20,6 +20,10 @@ const newSchema=new Schema({
         type:String,
         default:"none",
     },
+    phone:{
+        type: String,
+        default:"0356356497",
+    },
     role:{
         type:String,
         default:"user",
@@ -27,7 +31,7 @@ const newSchema=new Schema({
     },
     avatar:{
         type:String,
-        default:'none'
+        default:'https://res.cloudinary.com/dbonwxmgl/image/upload/v1717061277/xesgw0ilky3wbrj9xixd.jpg'
     },
     status:{
         type:String,
