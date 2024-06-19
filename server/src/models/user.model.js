@@ -24,6 +24,12 @@ const newSchema=new Schema({
         type: String,
         default:"0356356497",
     },
+    followers: [{
+        type: String
+    }],
+    following: [{
+        type: String
+    }],
     role:{
         type:String,
         default:"user",

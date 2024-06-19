@@ -29,6 +29,37 @@ const getStatusCounts = async () => {
   const getauth = async (id) => {
     return await usermodel.findById(id).select('name avatar').exec();
 }
+const addFollower = async (userId, followerId) => {
+    return await usermodel.findByIdAndUpdate(
+        userId,
+        { $push: { followers: followerId } },
+        { new: true, useFindAndModify: false }
+    );
+}
+
+const removeFollower = async (userId, followerId) => {
+    return await usermodel.findByIdAndUpdate(
+        userId,
+        { $pull: { followers: followerId } },
+        { new: true, useFindAndModify: false }
+    );
+}
+
+const addFollowing = async (userId, followingId) => {
+    return await usermodel.findByIdAndUpdate(
+        userId,
+        { $push: { following: followingId } },
+        { new: true, useFindAndModify: false }
+    );
+}
+
+const removeFollowing = async (userId, followingId) => {
+    return await usermodel.findByIdAndUpdate(
+        userId,
+        { $pull: { following: followingId } },
+        { new: true, useFindAndModify: false }
+    );
+}
   module.exports={
         adduser,
         getuserbyid,
@@ -36,4 +67,8 @@ const getStatusCounts = async () => {
         updateuser,
         getStatusCounts,
         getauth,
+        addFollower,
+        removeFollower,
+        addFollowing,
+        removeFollowing,
   }
