@@ -24,4 +24,10 @@ router.get('/all',catchAsync(blogController.getnews));
 
 router.get('/detail/:id',catchAsync(blogController.getDetail));
 
+router.post('/like/:id/:newsId',catchAsync(blogController.upvote));
+router.post('/dislike/:id/:newsId',catchAsync(blogController.downvote));
+
+router.delete('/unlike/:id/:newsId',catchAsync(blogController.removeUpvote));
+router.delete('/undislike/:id/:newsId',catchAsync(blogController.removeDownvote));
+
 module.exports = router;

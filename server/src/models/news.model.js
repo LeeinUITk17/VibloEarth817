@@ -33,7 +33,13 @@ const newSchema = new Schema(
     author:{
       type:String,
       default:"admin",
-    }
+    },
+    upvotes: [{
+      type: String,
+  }],
+  downvotes: [{
+      type: String,
+  }],
   },
   {
     timestamps: true,

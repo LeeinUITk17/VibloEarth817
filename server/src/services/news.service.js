@@ -31,6 +31,53 @@ const getStatusCounts = async () => {
   };
   return statusCounts;
 };
+const voteUp = async (newsId, userId) => {
+  const news = await newsModel.findByIdAndUpdate(
+      newsId,
+      { $addToSet: { upvotes: userId } },
+      { new: true, useFindAndModify: false }
+  );
+  if (!news) {
+    throw new Error('News not found');
+}
+  return news.upvotes.length;
+}
+
+const removeUpvote = async (newsId, userId) => {
+  const news = await newsModel.findByIdAndUpdate(
+      newsId,
+      { $pull: { upvotes: userId } },
+      { new: true, useFindAndModify: false }
+  );
+  if (!news) {
+    throw new Error('News not found');
+}
+  return news.upvotes.length;
+}
+
+const voteDown = async (newsId, userId) => {
+  const news = await newsModel.findByIdAndUpdate(
+      newsId,
+      { $addToSet: { downvotes: userId } },
+      { new: true, useFindAndModify: false }
+  );
+  if (!news) {
+    throw new Error('News not found');
+}
+  return news.downvotes.length;
+}
+
+const removeDownvote = async (newsId, userId) => {
+  const news = await newsModel.findByIdAndUpdate(
+      newsId,
+      { $pull: { downvotes: userId } },
+      { new: true, useFindAndModify: false }
+  );
+  if (!news) {
+    throw new Error('News not found');
+}
+  return news.downvotes.length;
+}
 module.exports = {
   addItem,
   getItems,
@@ -38,4 +85,8 @@ module.exports = {
   getItemById,
   updateItem,
   getStatusCounts,
+  voteUp,
+  removeUpvote,
+  voteDown,
+  removeDownvote,
 };

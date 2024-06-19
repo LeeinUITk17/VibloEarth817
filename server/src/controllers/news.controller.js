@@ -3,6 +3,10 @@ const {
     getItemById:getnewsbyid,
     updateItem,
     getItems,
+    voteUp,
+  removeUpvote,
+  voteDown,
+  removeDownvote,
  }=require('../services/news.service')
  const {
     getauth,
@@ -70,5 +74,48 @@ const {
             return res.send(false);
         }
     };
+    async upvote(req, res) {
+        try {
+          const {id,newsId}=req.params;
+          const result = await voteUp(newsId, id);
+          return res.send(result.toString());
+        } catch (error) {
+          console.error(error);
+          return res.send(false);
+        }
+      }
+    
+      async removeUpvote(req, res) {
+        try {
+          const {id,newsId}=req.params;
+          const result = await removeUpvote(newsId, id);
+          return res.send(result.toString());
+        } catch (error) {
+          console.error(error);
+          return res.send(false);
+        }
+      }
+    
+      async downvote(req, res) {
+        try {
+          const {id,newsId}=req.params;
+          const result = await voteDown(newsId, id);
+          return res.send(result.toString());
+        } catch (error) {
+          console.error(error);
+          return res.send(false);
+        }
+      }
+    
+      async removeDownvote(req, res) {
+        try {
+          const {id,newsId}=req.params;
+          const result = await removeDownvote(newsId, id);
+          return res.send(result.toString());
+        } catch (error) {
+          console.error(error);
+          return res.send(false);
+        }
+      }
  }
  module.exports=new newsController();
