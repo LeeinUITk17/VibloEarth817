@@ -75,12 +75,14 @@ const Profile = () => {
 
     const handleProfileUpdate = async (e) => {
         e.preventDefault();
-
-        const formData = new FormData(e.target);
-        formData.append('name', account.name);
-
+    
+        const data = {
+            name: account.name,
+            phone: account.phone
+        };
+    
         try {
-            const response = await axios.post(`http://localhost:8000/api/profile/update/${user._id}`, formData);
+            const response = await axios.post(`http://localhost:8000/api/profile/update/${user._id}`, data);
             if (response.data.name) {
                 setAccount(response.data);
             }
@@ -93,14 +95,14 @@ const Profile = () => {
     return (
         <div className="container light-style flex-grow-1 container-p-y">
             <h4 className="font-weight-bold py-3 mb-4">
-                Quản lí tài khoản 
+                Account Management
             </h4>
             <div className="card overflow-hidden">
                 <div className="row no-gutters row-bordered row-border-light">
                     <div className="col-md-3 pt-0">
                         <div className="list-group list-group-flush account-settings-links">
-                            <a className="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">Thông tin chung</a>
-                            <a className="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Đổi mật khẩu</a>
+                            <a className="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">Informations</a>
+                            <a className="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Follower</a>
                         </div>
                     </div>
                     <div className="col-md-9">
@@ -116,7 +118,7 @@ const Profile = () => {
                                                 <input type="file" className="form-control" name="avatar"
                                                     onChange={handleImageChange} />
                                             </label>
-                                            <button type="submit" className="btn btn-primary">Lưu ảnh</button>
+                                            <button type="submit" className="btn btn-primary">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -124,12 +126,12 @@ const Profile = () => {
                                     <hr className="border-light m-0" />
                                     <div className="card-body">
                                         <div className="form-group">
-                                            <label className="form-label">Tài khoản: </label>
+                                            <label className="form-label">Account: </label>
                                             <input type="text" className="form-control mb-1" name="username"
                                                 value={account.username} readOnly />
                                         </div>
                                         <div className="form-group">
-                                            <label className="form-label">Họ và tên: </label>
+                                            <label className="form-label">Fullname: </label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -139,14 +141,24 @@ const Profile = () => {
                                             />
                                         </div>
                                         <div className="form-group">
+                                            <label className="form-label">Phone number: </label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="phone"
+                                                value={account.phone}
+                                                onChange={(e) => setAccount({ ...account, phone: e.target.value })}
+                                            />
+                                        </div>
+                                        <div className="form-group">
                                             <label className="form-label">Email: </label>
                                             <input type="text" className="form-control mb-1" name="email" readOnly
                                                 value={account.email} />
                                         </div>
                                     </div>
                                     <div className="text-right mt-3 mb-3">
-                                        <button type="submit" className="btn btn-primary" form="profileForm">Lưu thay đổi</button>&nbsp;
-                                        <button type="button" className="btn btn-default" onClick={() => window.location.href = '/profile'}>Hủy</button>
+                                        <button type="submit" className="btn btn-primary" form="profileForm">Save Change</button>&nbsp;
+                                        <button type="button" className="btn btn-default" onClick={() => window.location.href = '/profile'}>Cancel</button>
                                     </div>
                                 </form>
                             </div>
