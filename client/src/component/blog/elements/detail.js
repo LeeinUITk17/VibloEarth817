@@ -115,6 +115,26 @@ const Detail = () => {
     }
   };
 
+  const handleFollow = async () => {
+    try {
+      await axios.post(`http://localhost:8000/api/profile/addFollower/${blog.author._id}/${user._id}`);
+      await axios.post(`http://localhost:8000/api/profile/addFollowing/${user._id}/${blog.author._id}`);
+      // Update the state to reflect the changes if necessary
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  const handleUnfollow = async () => {
+    try {
+      await axios.delete(`http://localhost:8000/api/profile/removeFollower/${blog.author._id}/${user._id}`);
+      await axios.delete(`http://localhost:8000/api/profile/removeFollowing/${user._id}/${blog.author._id}`);
+      // Update the state to reflect the changes if necessary
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading blog details: {error.message}</div>;
 
@@ -216,6 +236,32 @@ const Detail = () => {
           </div>
           <div className="col-lg-4">
             <div className="sidebar-section">
+              <div className="sidebar-widget card border-1 mb-3">
+                <img src={blog.author.avatar} alt="author image" className="img-fluid" />
+                <div className="card-body p-4 text-center">
+                  <h5 className="mb-0 mt-4">{blog.author.name}</h5>
+                  <p>Enjoy it!</p>
+                </div>
+                {user ? (
+                  <div>
+                    <button onClick={handleFollow} disabled={!user} style={{ fontFamily: 'Inter, sans-serif !important', backgroundColor: 'FFAC33' }}>
+                      Follow
+                    </button>
+                    <button onClick={handleUnfollow} disabled={!user} style={{ fontFamily: 'Inter, sans-serif !important', backgroundColor: 'FFAC33' }}>
+                      Unfollow
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <button onClick={handleFollow} disabled style={{ fontFamily: 'Inter, sans-serif !important', backgroundColor: 'FFAC33' }}>
+                      Follow
+                    </button>
+                    <button onClick={handleUnfollow} disabled style={{ fontFamily: 'Inter, sans-serif !important', backgroundColor: 'FFAC33' }}>
+                      Unfollow
+                    </button>
+                  </div>
+                )}
+              </div>
               <div className="recent-posts">
                 <h4>Recent Posts</h4>
                 <ul>
@@ -230,10 +276,10 @@ const Detail = () => {
                 <h4>Tags</h4>
                 <ul>
                   <li>
-                    <a href="single-news.html">Marine</a>
+                    <a href="/news">Marine</a>
                   </li>
                   <li>
-                    <a href="single-news.html">Pirates</a>
+                    <a href="/news">Pirates</a>
                   </li>
                 </ul>
               </div>
