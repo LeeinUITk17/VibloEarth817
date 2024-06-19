@@ -37,13 +37,39 @@ const Header = () => {
                             <li ><a href="/home">Home</a></li>
                             <li className="current-list-item"><a href="/news">News</a> </li>
                             <li><a href="/contact">Contact</a></li>
-                            <li>
+                            {user ? (
+                                <li>
                                 <div className="header-icons">
-                                    
-                                    {user? <img src='assets/img/logout.png' onClick={handleLogout} className="boxed-btn"></img>:<a className="login" href="/login"><img src='assets/img/login.png'></img></a> }
-                                    <a className="mobile-hide search-bar-icon" href="#"><i className="fas fa-search"></i></a>
+                                  <a href="/profile">
+                                    <img src="assets/img/account.png" alt="" />
+                                  </a>
+                                  <ul className="sub-menu">
+                                    <li>
+                                      <a href="/profile">Your Account</a>
+                                    </li>
+                                    <li className="header-icons">
+                                      <img
+                                        src="assets/img/logout.png"
+                                        onClick={handleLogout}
+                                        className="boxed-btn"
+                                        alt=""
+                                      />
+                                    </li>
+                                  </ul>
                                 </div>
-                            </li>
+                              </li>                       
+                            ) : (
+                                <li>
+                                <div className="header-icons">
+                                  <a className="login" href="/login">
+                                    <img src="assets/img/login.png" alt="" />
+                                  </a>{" "}
+                                  <a className="mobile-hide search-bar-icon" href="#">
+                                    <i className="fas fa-search"></i>
+                                  </a>
+                                </div>
+                              </li>
+                            )}
                         </ul>
                     </nav>
                     <a className="mobile-show search-bar-icon" href="#"><i className="fas fa-search"></i></a>
