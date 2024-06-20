@@ -42,7 +42,7 @@ const getfollower=async(id)=>{
     if(data.followers.length===0){
         return [];
     }
-    const promises = data.following.map(element => getauth(element));
+    const promises = data.followers ? data.followers.map(element => getauth(element)) : [];
     const List = await Promise.all(promises);
     return List;
 }
@@ -51,7 +51,7 @@ const getfollowing = async (id) => {
     if(data.following.length===0){
         return [];
     }
-    const promises = data.following.map(element => getauth(element));
+    const promises = data.following ? data.following.map(element => getauth(element)) : [];
     const List = await Promise.all(promises);
     //console.log(List);
     return List;

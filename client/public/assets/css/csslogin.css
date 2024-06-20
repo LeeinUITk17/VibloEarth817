@@ -1,0 +1,71 @@
+.coupon-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+  }
+  
+  .coupon-section h3 {
+    margin-bottom: 20px;
+  }
+  
+  .coupon-form-wrap {
+    margin-bottom: 20px;
+  }
+  
+  .coupon-form-wrap p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .coupon-form-wrap input {
+    margin-left: 10px;
+    padding: 5px;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #FFAC33; 
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  .coupon-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+  span.signin{
+    padding: 10px 20px;
+    background-color: #FFAC33; 
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+  }

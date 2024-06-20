@@ -34,7 +34,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="cart-section mt-150 mb-150">
+    <div className="cart-section mt-150 mb-150" >
     <div className="container">
         <div className="row">
             <div className="col-md-5">
@@ -58,14 +58,18 @@ const LoginForm = () => {
          <input type="password" name="password" value={formData.password} onChange={handleChange} required />
          </p>
         </div>
+       <div className='button-container'>
        <p> <button type="submit">Login</button></p>
+  <p><a href="/register"><span className="signin">Sign in</span></a></p>
+</div>
       </form>
-      <p> <a href="/register"> <button >Sign in</button></a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
   );
 };
 

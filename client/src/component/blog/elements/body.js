@@ -13,7 +13,7 @@ const Mainbody=()=>{
     <div className="latest-news mt-150 mb-150">
     <div className="container">
         <div className="row">
-        {blogs.map((blog) => (
+        {blogs && blogs.map((blog) => (
                     <div className="col-lg-4 col-md-6" key={blog._id}>
                         <div className="single-latest-news">
                             <a href={`/news/detail/${blog._id}/${user._id}`}>

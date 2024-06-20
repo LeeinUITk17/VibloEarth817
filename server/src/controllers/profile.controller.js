@@ -104,6 +104,7 @@ followers=async(req,res,next)=>{
   try{
       const {id}=req.params;
       const data=await getfollower(id);
+      console.log(data);
       if(data.length===0){
           return res.send('No followers');
       }

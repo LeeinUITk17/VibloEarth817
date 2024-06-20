@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import {Preloader,Footer,Copyright} from './../child.component';
 import Profile from './elements/body';
+import Header from './elements/header';
 const Profilepage=()=>{  
     useEffect(() => {
         const loadScript = (src) => {
@@ -36,6 +37,7 @@ const Profilepage=()=>{
       return (
         <>
         <Preloader />
+        <Header/>
          {/* <Profilebody/> */}
          <Profile/>
           <Footer/>
