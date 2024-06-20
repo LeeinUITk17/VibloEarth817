@@ -39,12 +39,18 @@ const addFollower = async (userId, followerId) => {
 
 const getfollower=async(id)=>{
     const data = await usermodel.findById(id).select('followers').exec();
+    if(data.followers.length===0){
+        return [];
+    }
     const promises = data.following.map(element => getauth(element));
     const List = await Promise.all(promises);
     return List;
 }
 const getfollowing = async (id) => {
     const data = await usermodel.findById(id).select('following').exec();
+    if(data.following.length===0){
+        return [];
+    }
     const promises = data.following.map(element => getauth(element));
     const List = await Promise.all(promises);
     //console.log(List);

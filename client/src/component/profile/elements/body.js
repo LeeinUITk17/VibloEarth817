@@ -4,6 +4,8 @@ import { UserContext } from '../../../context/UserContext';
 
 const Profile = () => {
     const { user } = useContext(UserContext);
+    const [follower,setFollowers]=useState(null);
+    const [following,setfollowing]=useState(null);
 
     const [account, setAccount] = useState({
         username: '',
@@ -35,9 +37,28 @@ const Profile = () => {
                 console.error('Error fetching user data:', error);
             }
         };
+        const fetchfollower=async()=>{
+            const response = await axios.get(`http://localhost:8000/api/profile/getfollower/${user._id}`);
+            if(response.data.length===0){
+                setFollowers([]);
+            }
+            setFollowers(response.data);
+           console.log(response.data);
+        };
+        const fetchfollowing=async()=>{
+            const response = await axios.get(`http://localhost:8000/api/profile/getfollowing/${user._id}`);
+            setfollowing(response.data);
+            if(response.data.length===0){
+                setfollowing([]);
+            }
+            setfollowing(response.data);
+            console.log(response.data);
+        }
 
         if (user) {
             fetchUserData();
+            fetchfollower();
+            fetchfollowing();
         }
     }, [user]);
 
@@ -102,7 +123,8 @@ const Profile = () => {
                     <div className="col-md-3 pt-0">
                         <div className="list-group list-group-flush account-settings-links">
                             <a className="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">Informations</a>
-                            <a className="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Follower</a>
+                            <a className="list-group-item list-group-item-action" data-toggle="list" href="#follower">Follower</a>
+                            <a className="list-group-item list-group-item-action" data-toggle="list" href="#following">Following</a>
                         </div>
                     </div>
                     <div className="col-md-9">
@@ -162,25 +184,50 @@ const Profile = () => {
                                     </div>
                                 </form>
                             </div>
-                            <div className="tab-pane fade" id="account-change-password">
-                                <div className="card-body pb-2">
-                                    <div className="form-group">
-                                        <label className="form-label">Mật khẩu hiện tại: </label>
-                                        <input type="password" className="form-control" placeholder="chưa cung cấp tính năng này"
-                                            readOnly />
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="form-label">Mật khẩu mới: </label>
-                                        <input type="password" className="form-control" placeholder="chưa cung cấp tính năng này"
-                                            readOnly />
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="form-label">Nhập lại mật khẩu mới: </label>
-                                        <input type="password" className="form-control" placeholder="chưa cung cấp tính năng này"
-                                            readOnly />
-                                    </div>
-                                </div>
-                            </div>
+                            <div className="tab-pane fade" id="follower">
+    <div className="col-lg-8 col-md-12">
+        <div className="cart-table-wrap">
+            <table className="cart-table">
+                <thead className="cart-table-head">
+                    <tr className="table-head-row">									
+                        <th className="product-image">Avatar</th>
+                        <th className="product-name">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+    {Array.isArray(follower) && follower.map((item) => (
+        <tr className="table-body-row">
+            <td className="product-image"><img src={item.avatar} alt=""></img></td>
+            <td className="product-name">{item.name}</td>
+        </tr>
+    ))}
+</tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div className="tab-pane fade" id="following">
+    <div className="col-lg-8 col-md-12">
+        <div className="cart-table-wrap">
+            <table className="cart-table">
+                <thead className="cart-table-head">
+                    <tr className="table-head-row">									
+                        <th className="product-image">Avatar</th>
+                        <th className="product-name">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+    {Array.isArray(following) && following.map((item) => (
+        <tr className="table-body-row">
+            <td className="product-image"><img src={item.avatar} alt=""></img></td>
+            <td className="product-name">{item.name}</td>
+        </tr>
+    ))}
+</tbody>
+            </table>
+        </div>
+    </div>
+</div>
                         </div>
                     </div>
                 </div>

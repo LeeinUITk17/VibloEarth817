@@ -104,6 +104,9 @@ followers=async(req,res,next)=>{
   try{
       const {id}=req.params;
       const data=await getfollower(id);
+      if(data.length===0){
+          return res.send('No followers');
+      }
       return res.send(data);
   }
   catch(error){
@@ -116,6 +119,9 @@ following=async(req,res,next)=>{
       const {id}=req.params;
       const data=await getfollowing(id);
      // console.log(data);
+      if(data.length===0){
+          return res.send('No following');
+      }
       return res.send(data);
   }
   catch(error){
