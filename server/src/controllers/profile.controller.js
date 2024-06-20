@@ -55,7 +55,8 @@ const {
        try {
           const { id, followerId } = req.params;
           const account=await getuserbyid(id);
-          if(!account.followers.includes(followerId)&& id!==followerId){
+          if(!account.followers.includes(followerId)　&& id!==followerId){
+            console.log('addfollower');
             await addFollower(id, followerId);
           }
           return res.send(true);
@@ -79,7 +80,8 @@ addfollowing=async(req,res,next)=>{
   try {
       const { id, followingId } = req.params;
       const account=await getuserbyid(id);
-      if(!account.following.includes(followingId && id!==followingId)){
+      if(!account.following.includes(followingId)　&& id!==followingId){
+        console.log('addfollowing');
         await addFollowing(id, followingId);
       }
       return res.send(true);

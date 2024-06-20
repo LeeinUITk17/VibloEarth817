@@ -41,7 +41,7 @@ const Detail = () => {
         setBlog(response.data);
         // console.log(response.data);
         // console.log(followers.data);
-        setIsFollowing(followers.data.followers.includes(response.data.author._id));
+        setIsFollowing(!followers.data.followers.includes(response.data.author._id));
         setLoading(false);
       } catch (error) {
         setError(error);
