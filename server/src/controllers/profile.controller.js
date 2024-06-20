@@ -5,6 +5,8 @@ const {
     removeFollower,
     addFollowing,
     removeFollowing,
+    getfollower,
+    getfollowing,
   } = require('../services/user.service');
   const path = require('path');
   const cloudinary = require('cloudinary').v2;
@@ -53,7 +55,7 @@ const {
        try {
           const { id, followerId } = req.params;
           const account=await getuserbyid(id);
-          if(!account.followers.includes(followerId)){
+          if(!account.followers.includes(followerId)&& id!==followerId){
             await addFollower(id, followerId);
           }
           return res.send(true);
@@ -77,7 +79,7 @@ addfollowing=async(req,res,next)=>{
   try {
       const { id, followingId } = req.params;
       const account=await getuserbyid(id);
-      if(!account.following.includes(followingId)){
+      if(!account.following.includes(followingId && id!==followingId)){
         await addFollowing(id, followingId);
       }
       return res.send(true);
@@ -97,5 +99,30 @@ console.error('Error processing form:', error);
 return res.send('An error occurred. Check server console for details.');
 }
 }
+
+followers=async(req,res,next)=>{
+  try{
+      const {id}=req.params;
+      const data=await getfollower(id);
+      return res.send(data);
+  }
+  catch(error){
+      console.error('Error processing form:', error);
+      return res.send('An error occurred. Check server console for details.');
+  }
+}
+following=async(req,res,next)=>{
+  try{
+      const {id}=req.params;
+      const data=await getfollowing(id);
+     // console.log(data);
+      return res.send(data);
+  }
+  catch(error){
+      console.error('Error processing form:', error);
+      return res.send('An error occurred. Check server console for details.');
+}
+}
+
   } 
   module.exports = new profileController();

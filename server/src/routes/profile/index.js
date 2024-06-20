@@ -15,4 +15,7 @@ router.delete('/removeFollower/:id/:followerId', catchAsync(ProfileController.re
 router.post('/addFollowing/:id/:followingId', catchAsync(ProfileController.addfollowing));
 router.delete('/removeFollowing/:id/:followingId', catchAsync(ProfileController.removefollowing));
 
+router.get('/getfollower/:id',catchAsync(ProfileController.followers));
+router.get('/getfollowing/:id',catchAsync(ProfileController.following));
+
 module.exports = router;

@@ -37,6 +37,20 @@ const addFollower = async (userId, followerId) => {
     );
 }
 
+const getfollower=async(id)=>{
+    const data = await usermodel.findById(id).select('followers').exec();
+    const promises = data.following.map(element => getauth(element));
+    const List = await Promise.all(promises);
+    return List;
+}
+const getfollowing = async (id) => {
+    const data = await usermodel.findById(id).select('following').exec();
+    const promises = data.following.map(element => getauth(element));
+    const List = await Promise.all(promises);
+    //console.log(List);
+    return List;
+}
+
 const removeFollower = async (userId, followerId) => {
     return await usermodel.findByIdAndUpdate(
         userId,
@@ -71,4 +85,6 @@ const removeFollowing = async (userId, followingId) => {
         removeFollower,
         addFollowing,
         removeFollowing,
+        getfollower,
+        getfollowing,
   }
