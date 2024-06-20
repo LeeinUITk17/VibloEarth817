@@ -39,9 +39,12 @@ const Detail = () => {
         const response = await axios.get(`http://localhost:8000/api/blog/detail/${id}`);
         const followers = await axios.get(`http://localhost:8000/api/profile/inf/${userid}`);
         setBlog(response.data);
-        // console.log(response.data);
-        // console.log(followers.data);
-        setIsFollowing(!followers.data.followers.includes(response.data.author._id));
+         if(followers.data.followers.includes(response.data.author._id)){
+          setIsFollowing(true);
+         }
+         else{
+          setIsFollowing(false);
+         }
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -151,8 +154,8 @@ const Detail = () => {
 
   const handleFollow = async () => {
     try {
-     const response= await axios.post(`http://localhost:8000/api/profile/addFollower/${blog.author._id}/${user._id}`);
-      await axios.post(`http://localhost:8000/api/profile/addFollowing/${user._id}/${blog.author._id}`);
+     const response= await axios.post(`http://localhost:8000/api/profile/addFollower/${user._id}/${blog.author._id}`);
+      await axios.post(`http://localhost:8000/api/profile/addFollowing/${blog.author._id}/${user._id}`);
      if(response.data===true){
       setIsFollowing(true);
      }
@@ -165,8 +168,8 @@ const Detail = () => {
 
   const handleUnfollow = async () => {
     try {
-      const response= await axios.delete(`http://localhost:8000/api/profile/removeFollower/${blog.author._id}/${user._id}`);
-      await axios.delete(`http://localhost:8000/api/profile/removeFollowing/${user._id}/${blog.author._id}`);
+      const response= await axios.delete(`http://localhost:8000/api/profile/removeFollower/${user._id}/${blog.author._id}`);
+      await axios.delete(`http://localhost:8000/api/profile/removeFollowing/${blog.author._id}/${user._id}`);
       if(response.data===true){
         setIsFollowing(false);
        }
