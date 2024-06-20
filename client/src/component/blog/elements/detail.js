@@ -12,8 +12,30 @@ const Detail = () => {
   const [comment, setComment] = useState('');
   const { blogs } = useContext(BlogContext);
   const { user } = useContext(UserContext);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [account, setAccount] = useState({
+    followers: ''
+  });
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/profile/inf/${user._id}`);
+        if (response.data) {
+          setAccount({
+            followers: response.data.followers,
+          });
+        } else {
+          console.error('Failed to fetch user data:');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+  
+    if (user) {
+      fetchUserData();
+    }
     const fetchBlogDetail = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/blog/detail/${id}`);
@@ -25,8 +47,18 @@ const Detail = () => {
       }
     };
 
+    const checkFollowingStatus = () => {
+      if (account && blog) {
+        setIsFollowing(account.followers.includes(blog.author._id));
+      }
+    };
+
     fetchBlogDetail();
-  }, [id]);
+    checkFollowingStatus();
+  }, [id,user,blog,account]);
+
+
+
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -117,9 +149,12 @@ const Detail = () => {
 
   const handleFollow = async () => {
     try {
-      await axios.post(`http://localhost:8000/api/profile/addFollower/${blog.author._id}/${user._id}`);
+     const response= await axios.post(`http://localhost:8000/api/profile/addFollower/${blog.author._id}/${user._id}`);
       await axios.post(`http://localhost:8000/api/profile/addFollowing/${user._id}/${blog.author._id}`);
-      // Update the state to reflect the changes if necessary
+     if(response.data===true){
+      setIsFollowing(true);
+     }
+
     } catch (error) {
       setError(error);
     }
@@ -127,9 +162,11 @@ const Detail = () => {
 
   const handleUnfollow = async () => {
     try {
-      await axios.delete(`http://localhost:8000/api/profile/removeFollower/${blog.author._id}/${user._id}`);
+      const response= await axios.delete(`http://localhost:8000/api/profile/removeFollower/${blog.author._id}/${user._id}`);
       await axios.delete(`http://localhost:8000/api/profile/removeFollowing/${user._id}/${blog.author._id}`);
-      // Update the state to reflect the changes if necessary
+      if(response.data===true){
+        setIsFollowing(false);
+       }
     } catch (error) {
       setError(error);
     }
@@ -244,12 +281,16 @@ const Detail = () => {
                 </div>
                 {user ? (
                   <div>
+                  {!isFollowing && (
                     <button onClick={handleFollow} disabled={!user} style={{ fontFamily: 'Inter, sans-serif !important', backgroundColor: 'FFAC33' }}>
                       Follow
                     </button>
+                     )}
+                      {isFollowing && (
                     <button onClick={handleUnfollow} disabled={!user} style={{ fontFamily: 'Inter, sans-serif !important', backgroundColor: 'FFAC33' }}>
                       Unfollow
                     </button>
+                      )}
                   </div>
                 ) : (
                   <div>

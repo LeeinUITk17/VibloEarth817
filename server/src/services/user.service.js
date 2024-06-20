@@ -27,7 +27,7 @@ const getStatusCounts = async () => {
   };
 
   const getauth = async (id) => {
-    return await usermodel.findById(id).select('name avatar').exec();
+    return await usermodel.findById(id).select('_id name avatar').exec();
 }
 const addFollower = async (userId, followerId) => {
     return await usermodel.findByIdAndUpdate(

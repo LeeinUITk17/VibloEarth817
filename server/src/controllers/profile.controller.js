@@ -53,8 +53,8 @@ const {
        try {
           const { id, followerId } = req.params;
           await addFollower(id, followerId);
-          const account = await getuserbyid(id);
-          return res.send(account);
+          // const account = await getuserbyid(id);
+          return res.send(true);
     }catch (error) {
         console.error('Error processing form:', error);
         return res.send('An error occurred. Check server console for details.');
@@ -64,8 +64,8 @@ const {
     try {
         const { id, followerId } = req.params;
         await removeFollower(id, followerId);
-        const account = await getuserbyid(id);
-        return res.send(account);
+        // const account = await getuserbyid(id);
+        return res.send(true);
   }catch(error){
       console.error('Error processing form:', error);
       return res.send('An error occurred. Check server console for details.');
@@ -75,8 +75,8 @@ addfollowing=async(req,res,next)=>{
   try {
       const { id, followingId } = req.params;
       await addFollowing(id, followingId);
-      const account = await getuserbyid(id);
-      return res.send(account);
+      // const account = await getuserbyid(id);
+      return res.send(true);
 }catch(error){
     console.error('Error processing form:', error);
     return res.send('An error occurred. Check server console for details.');
@@ -86,8 +86,8 @@ removefollowing=async(req,res,next)=>{
 try {
     const { id, followingId } = req.params;
     await removeFollowing(id, followingId);
-    const account = await getuserbyid(id);
-    return res.send(account);
+    // const account = await getuserbyid(id);
+    return res.send(true);
 }catch(error){
 console.error('Error processing form:', error);
 return res.send('An error occurred. Check server console for details.');
