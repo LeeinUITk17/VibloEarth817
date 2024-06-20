@@ -5,7 +5,7 @@ import { BlogContext } from '../../../context/BlogContext';
 import { UserContext } from '../../../context/UserContext';
 
 const Detail = () => {
-  const { id } = useParams();
+  const { id,userid } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,50 +13,52 @@ const Detail = () => {
   const { blogs } = useContext(BlogContext);
   const { user } = useContext(UserContext);
   const [isFollowing, setIsFollowing] = useState(false);
-  const [account, setAccount] = useState({
-    followers: ''
-  });
+  // const [followers, setFollowers] = useState([]);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/api/profile/inf/${user._id}`);
-        if (response.data) {
-          setAccount({
-            followers: response.data.followers,
-          });
-        } else {
-          console.error('Failed to fetch user data:');
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
+    // const fetchUserData = async () => {
+    //   try {
+    //     const response = await axios.get(`http://localhost:8000/api/profile/inf/${user._id}`);
+    //     console.log(response.data.followers);
+    //     if (response.data) {
+    //       setFollowers(response.data.followers);
+    //     } else {
+    //       console.error('Failed to fetch user data:');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error fetching user data:', error);
+    //   }
+    // };
   
-    if (user) {
-      fetchUserData();
-    }
+    // if (user) {
+    //   fetchUserData();
+    // }
+
     const fetchBlogDetail = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/blog/detail/${id}`);
+        const followers = await axios.get(`http://localhost:8000/api/profile/inf/${userid}`);
         setBlog(response.data);
+        // console.log(response.data);
+        // console.log(followers.data);
+        setIsFollowing(followers.data.followers.includes(response.data.author._id));
         setLoading(false);
       } catch (error) {
         setError(error);
         setLoading(false);
       }
     };
+    // const checkFollowingStatus =()=>{
+    //     if(followers){
+    //       console.log(followers.includes(blog.author._id));
+    //     }
+    // }
 
-    const checkFollowingStatus = () => {
-      if (account && blog) {
-        setIsFollowing(account.followers.includes(blog.author._id));
-      }
-    };
+  fetchBlogDetail();
+  // checkFollowingStatus();
+  }, [id,userid]);
 
-    fetchBlogDetail();
-    checkFollowingStatus();
-  }, [id,user,blog,account]);
-
+ 
 
 
 
@@ -154,6 +156,7 @@ const Detail = () => {
      if(response.data===true){
       setIsFollowing(true);
      }
+    //  alert(response.data);
 
     } catch (error) {
       setError(error);

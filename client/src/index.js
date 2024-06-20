@@ -26,7 +26,7 @@ root.render(
           <Route path="/" element={<Homepage />} />
           <Route path="/home" element={<Homepage />} />
           <Route path="/news" element={<Blogpage />} />
-          <Route path="/news/detail/:id" element={<Detailpage />} />
+          <Route path="/news/detail/:id/:userid" element={<Detailpage />} />
           <Route path="/news/post" element={<Postpage />} />
           <Route path="/contact" element={<Contactpage />} />
           <Route path="/login" element={<Loginpage />} />

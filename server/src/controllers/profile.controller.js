@@ -52,8 +52,10 @@ const {
     addfollower=async(req,res,next)=>{
        try {
           const { id, followerId } = req.params;
-          await addFollower(id, followerId);
-          // const account = await getuserbyid(id);
+          const account=await getuserbyid(id);
+          if(!account.followers.includes(followerId)){
+            await addFollower(id, followerId);
+          }
           return res.send(true);
     }catch (error) {
         console.error('Error processing form:', error);
@@ -74,8 +76,10 @@ const {
 addfollowing=async(req,res,next)=>{
   try {
       const { id, followingId } = req.params;
-      await addFollowing(id, followingId);
-      // const account = await getuserbyid(id);
+      const account=await getuserbyid(id);
+      if(!account.following.includes(followingId)){
+        await addFollowing(id, followingId);
+      }
       return res.send(true);
 }catch(error){
     console.error('Error processing form:', error);
