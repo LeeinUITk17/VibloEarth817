@@ -12,7 +12,8 @@ import Contactpage from './component/contact/index';
 import Loginpage from './component/login/index';
 import RegisterForm from './component/login/form';
 import Profilepage from './component/profile/index';
-import PrivateRoute from './role/PrivateRoute';
+// import PrivateRoute from './role/PrivateRoute';
+// import AuthLimit from './role/AuthLimit';
 
 import { UserProvider } from './context/UserContext';
 import { BlogProvider } from './context/BlogContext';
@@ -35,9 +36,12 @@ root.render(
               <Route path="/news/post" element={<Postpage />} />
               <Route path="/news/detail/:id/:userid" element={<Detailpage />} />
            
-            <Route element={<PrivateRoute />}>
+            {/* <Route element={<PrivateRoute />}>
              
             </Route>
+            <Route element={<AuthLimit />}>
+           
+            </Route> */}
           </Routes>
         </Router>
       </BlogProvider>

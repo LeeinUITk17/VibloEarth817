@@ -35,7 +35,11 @@ const Detail = () => {
     // }
 
     const fetchBlogDetail = async () => {
+     
       try {
+        if(userid==='undefined'){
+          window.location.href = '/login';
+        }
         const response = await axios.get(`http://localhost:8000/api/blog/detail/${id}`);
         const followers = await axios.get(`http://localhost:8000/api/profile/inf/${userid}`);
         setBlog(response.data);
