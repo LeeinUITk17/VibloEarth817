@@ -28,9 +28,16 @@ const RegisterForm = () => {
       }, {
         withCredentials: true // Ensure cookies are sent with the request
       });
-      console.log('Response:', response.data);
-      alert('Registration successful!');
-      window.location.href = '/login'; 
+      // console.log('Response:', response.data);
+      if(response.data===true){
+        alert('Registration successful!');
+        window.location.href = '/login'; 
+      }
+      else{
+        alert('Registration failed. Please try again.');
+        window.location.reload();
+      }
+      
     } catch (error) {
       console.error('Error:', error.response.data);
       alert('Registration failed. Please try again.');

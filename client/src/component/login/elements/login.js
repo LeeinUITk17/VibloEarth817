@@ -24,9 +24,12 @@ const LoginForm = () => {
       }, {
         withCredentials: true 
       });
-      console.log('Login Response:', response.data);
-      alert('Login successful!');
+     if(response.data===true){
       window.location.href = '/home';
+     }else{
+      alert('Login failed. Please try again.');
+      window.location.reload();
+     }
     } catch (error) {
       console.error('Error:', error.response.data);
       alert('Login failed. Please try again.');

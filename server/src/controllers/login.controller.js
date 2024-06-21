@@ -9,10 +9,10 @@ class loginController{
             console.log(req.body);
            const user= await registerService(req.body);
         //    return res.render('login/updateimage',{id: user._id});
-        return res.send('register success');
+        return res.send(true);
         } catch (err) {
             // return res.render('login/formregister');
-            return res.send('register failed');
+            return res.send(false);
         }
     };
     
@@ -22,34 +22,34 @@ class loginController{
                 if (err) {
                     console.log('error 1');
                     // return res.render('login/formlogin');
-                    return res.send('login failed');
+                    return res.send(false);
                 }
                 if (!user) {
                     // return res.redirect('/login');
-                    return res.send('login failed');
+                    return res.send(false);
                 }
                 req.login(user, async (err) => {
                     if (err) {
                         console.log('error 2');
                         // return res.render('login/formlogin');
-                        return res.send('login failed');
+                        return res.send(false);
                     }
                     try {
                     
                         const token = await loginService(req, req.body);
                         res.cookie('jwt', token, { httpOnly: true });
                         // return res.redirect('/home');
-                        return res.send('login success');
+                        return res.send(true);
                     } catch (error) {
                         console.log('error 4');
                         // return res.render('login/formlogin');
-                        return res.send('login failed');
+                        return res.send(false);
                     }
                 });
             })(req, res, next);
         } catch (err) {
             // return res.render('login/formlogin');
-            return res.send('login failed');
+            return res.send(false);
         }
     };
     logout = async (req, res, next) => {
