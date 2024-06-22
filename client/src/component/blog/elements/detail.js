@@ -318,7 +318,7 @@ const Detail = () => {
                 <ul>
                   {blogs.slice(0, 5).map((blog) => (
                     <li key={blog._id}>
-                      <a href={`/news/detail/${blog._id}`}>{blog.name}</a>
+                      <a href={`/news/detail/${blog._id}/${user._id}`}>{blog.name}</a>
                     </li>
                   ))}
                 </ul>
