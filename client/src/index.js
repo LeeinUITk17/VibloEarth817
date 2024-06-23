@@ -14,6 +14,7 @@ import RegisterForm from './component/login/form';
 import Profilepage from './component/profile/index';
 // import PrivateRoute from './role/PrivateRoute';
 // import AuthLimit from './role/AuthLimit';
+import AuthCheck from './role/AuthCheck';
 
 import { UserProvider } from './context/UserContext';
 import { BlogProvider } from './context/BlogContext';
@@ -30,18 +31,11 @@ root.render(
             <Route path="/home" element={<Homepage />} />
             <Route path="/news" element={<Blogpage />} />
             <Route path="/contact" element={<Contactpage />} />
-            <Route path="/login" element={<Loginpage />} />
-            <Route path="/register" element={<RegisterForm />} />
+            <Route path="/login" element={<AuthCheck><Loginpage /></AuthCheck>} />
+            <Route path="/register" element={<AuthCheck><RegisterForm /></AuthCheck>} />
             <Route path="/profile" element={<Profilepage />} />
               <Route path="/news/post" element={<Postpage />} />
               <Route path="/news/detail/:id/:userid" element={<Detailpage />} />
-           
-            {/* <Route element={<PrivateRoute />}>
-             
-            </Route>
-            <Route element={<AuthLimit />}>
-           
-            </Route> */}
           </Routes>
         </Router>
       </BlogProvider>

@@ -20,7 +20,14 @@ router.use((req, res, next) => {
 
 
 router.get('/',catchAsync(async (req, res) => {
-    res.json(req.user);
+   return res.json(req.user);
+}));
+router.get('/check',catchAsync(async (req, res) => {
+    if(req.user){
+        return res.json({isLoggedIn:true});
+    }else{
+        return res.json({isLoggedIn:false});
+    }
 }));
 
 
