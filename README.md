@@ -24,7 +24,8 @@
 #### MongoDB
 
 Cơ sở dữ liệu được sử dụng là MongoDB ,hệ quản trị cơ sở dữ liệu NoSQL , cho phép lưu trữ dữ liệu dưới dạng document linh hoạt và mở rộng.
-<img width="852" alt="image" src="https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/c3756ccc-6fe0-4f77-860a-78b2aa3444d6">
+<img width="860" alt="image" src="https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/0a0656cc-4ebd-4b75-b3ff-9ca9ebf5ecd1">
+
 
 
 
