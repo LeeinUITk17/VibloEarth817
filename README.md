@@ -24,6 +24,8 @@
 #### MongoDB
 
 Cơ sở dữ liệu được sử dụng là MongoDB ,hệ quản trị cơ sở dữ liệu NoSQL , cho phép lưu trữ dữ liệu dưới dạng document linh hoạt và mở rộng.
+<img width="827" alt="image" src="https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/633df7e0-c5b6-4a5d-92bb-13d4ddb77f4b">
+
 
 ## Các chức năng chính của trang web
 
