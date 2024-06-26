@@ -24,16 +24,26 @@
 #### MongoDB
 
 Cơ sở dữ liệu được sử dụng là MongoDB ,hệ quản trị cơ sở dữ liệu NoSQL , cho phép lưu trữ dữ liệu dưới dạng document linh hoạt và mở rộng.
+<img width="860" alt="image" src="https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/0a0656cc-4ebd-4b75-b3ff-9ca9ebf5ecd1">
+
+
+
 
 ## Các chức năng chính của trang web
 
 - **Đăng kí / Đăng nhập:** Người dùng có thể đăng ký tài khoản mới và đăng nhập vào hệ thống.
+- https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/d9958601-9fbc-434a-92fa-3754c82af0c6
 - **Tạo bài viết:** Người dùng có thể tạo và chia sẻ bài viết mới.
+- https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/3b09b1ca-c060-4b12-aea1-f9da42c3b888
 - **Comment:** Người dùng có thể bình luận trên các bài viết.
-- **Contact:** Trang liên hệ để người dùng gửi phản hồi hoặc liên hệ với quản trị viên.
-- **Quản lí tài khoản:** Người dùng có thể thêm, sửa, xóa thông tin tài khoản của mình.
 - **Vote Up / Vote Down bài viết:** Người dùng có thể bình chọn (upvote) hoặc phản đối (downvote) các bài viết.
+- https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/d9995cec-c4e0-45c9-906a-a3f8421f5af8
+- **Contact:** Trang liên hệ để người dùng gửi phản hồi hoặc liên hệ với quản trị viên.
+- https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/93b410b9-d904-4afa-b1f6-2e04599569df
+- **Quản lí tài khoản:** Người dùng có thể thêm, sửa, xóa thông tin tài khoản của mình.
+- https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/46e5da30-257a-4b7f-b1a5-7fd513de8f3a
 - **Follow người dùng khác:** Người dùng có thể theo dõi các tài khoản khác.
+- https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/b8dd0f67-7c5a-44ed-b8fa-52e885e988ae
 ## Cách setup môi trường
 
 1. **Cài đặt Node.js và npm:**
@@ -61,7 +71,7 @@ Cơ sở dữ liệu được sử dụng là MongoDB ,hệ quản trị cơ s�
     npm run build
     npm start
     ```
-    ## Hình ảnh sản 
+    ## Hình ảnh sản phẩm
 <img width="1064" alt="image" src="https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/684e3ad7-e3f5-48d5-b707-ecdd89160f5c">
 <img width="1067" alt="image" src="https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/89b5efa0-eacc-4e88-9025-754a52d94b36">
 <img width="228" alt="image" src="https://github.com/LeeinUITk17/VibloEarth817/assets/119780047/a4f8d680-23d7-46eb-9f7f-424dd40f81e3">
