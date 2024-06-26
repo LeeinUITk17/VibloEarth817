@@ -7,7 +7,8 @@ const cors = require('cors');
 const { connect } = require("./src/config/db");
 const passport=require('./src/helpers/passport');
 const path = require('path');
-
+const doenv=require('dotenv');
+doenv.config();
 var app = express();
 
 connect();
@@ -18,7 +19,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 app.use(session({
-  secret: "cnttvietnhatk17",
+  secret: process.env.JWT_TOKEN_SECRET,
   resave: false,
   saveUninitialized: true,
 }));
