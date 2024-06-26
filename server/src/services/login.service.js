@@ -2,6 +2,8 @@ const bcrypt = require('bcrypt');
 const usermodel = require('../models/user.model');
 const jwt = require('jsonwebtoken'); 
 
+const doenv=require('dotenv');
+doenv.config();
 const register = async (body) => {
   try {
       const user = new usermodel(body);
@@ -27,7 +29,7 @@ const login = async (req, body) => {
       throw new Error('Invalid username or password');
     }
     const userWithoutPassword = { ...user._doc, password: undefined };
-    const auth = jwt.sign(userWithoutPassword, 'cnttvietnhatk17');
+    const auth = jwt.sign(userWithoutPassword, process.env.JWT_TOKEN_SECRET);
     return auth;
   } catch (error) {
     console.error(error);

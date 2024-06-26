@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// Setting layout and handling routes
 const routes = [
     { path: '/profile', handler: require('./profile') },
     { path: '/blog',  handler: require('./blog') },
@@ -15,7 +14,6 @@ routes.forEach(route => {
 });
 
 
-// Error handling middleware
 router.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('server error!');

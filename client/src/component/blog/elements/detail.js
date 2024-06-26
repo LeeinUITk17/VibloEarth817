@@ -16,23 +16,7 @@ const Detail = () => {
   // const [followers, setFollowers] = useState([]);
 
   useEffect(() => {
-    // const fetchUserData = async () => {
-    //   try {
-    //     const response = await axios.get(`http://localhost:8000/api/profile/inf/${user._id}`);
-    //     console.log(response.data.followers);
-    //     if (response.data) {
-    //       setFollowers(response.data.followers);
-    //     } else {
-    //       console.error('Failed to fetch user data:');
-    //     }
-    //   } catch (error) {
-    //     console.error('Error fetching user data:', error);
-    //   }
-    // };
-  
-    // if (user) {
-    //   fetchUserData();
-    // }
+
 
     const fetchBlogDetail = async () => {
      
