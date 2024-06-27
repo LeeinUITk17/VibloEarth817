@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
-
+const doenv=require('dotenv');
+doenv.config();
 const generateToken = (userId, username, productIds) => {
-  const secretKey = 'cnttvietnhatk17';
+  const secretKey = process.env.JWT_TOKEN_SECRET;
 
   const payload = {
     userId,
@@ -20,7 +21,7 @@ const generateToken = (userId, username, productIds) => {
 };
 
 const verifyToken = (token) => {
-    const secretKey = 'cnttvietnhatk17';
+    const secretKey = process.env.JWT_TOKEN_SECRET;
   
     try {
       const decoded = jwt.verify(token, secretKey);
