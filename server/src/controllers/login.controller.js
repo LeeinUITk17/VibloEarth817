@@ -36,9 +36,9 @@ class loginController{
                     }
                     try {
                     
-                        const token = await loginService(req, req.body);
-                        res.cookie('jwt', token, { httpOnly: true });
-                        // return res.redirect('/home');
+                        const { accessToken, refreshToken }  = await loginService(req, req.body);
+                        res.cookie('jwt', accessToken, { httpOnly: true }); 
+                    res.cookie('refreshJwt', refreshToken, { httpOnly: true }); 
                         return res.send(true);
                     } catch (error) {
                         console.log('error 4');
@@ -49,12 +49,13 @@ class loginController{
             })(req, res, next);
         } catch (err) {
             // return res.render('login/formlogin');
-            return res.send(false);
+            return res.send(false);   
         }
     };
     logout = async (req, res, next) => {
         try {
             res.clearCookie('jwt');
+         res.clearCookie('refreshJwt');  
             req.logout((err) => {
                 if (err) {
                     return next(err); 
