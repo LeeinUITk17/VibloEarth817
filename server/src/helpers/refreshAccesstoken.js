@@ -4,13 +4,16 @@ const {
 const {
     refreshAccessToken,
 }=require('../services/login.service');
-const refreshAccess=async (token)=>{
-    const decoded=verifyToken(token);
-    if(decoded){
-        const newAccessToken=await refreshAccessToken(decoded.id);
-        return newAccessToken;
+const refreshAccess=async (token)=>{ 
+    try {
+        const decoded=verifyToken(token);
+        if(decoded){
+            const newAccessToken=await refreshAccessToken(decoded.id);
+            return newAccessToken;
+        }
+    }catch(error){
+        throw error;
     }
-   return null;
 }
 module.exports ={
     refreshAccess,

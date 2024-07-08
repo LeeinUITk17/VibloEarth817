@@ -52,6 +52,7 @@ const login = async (req, body) => {
     }
     const userWithoutPassword = { ...user._doc, password: undefined };
     const existingToken=await tokenmodel.findOne({userid:user._id, expireAt: { $gt: new Date() }});
+    console.log(existingToken);
     let accessToken,refreshToken
 
     if(existingToken){

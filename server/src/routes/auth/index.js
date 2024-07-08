@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const {
     verifyToken,
 } = require('../../helpers/jwt.helper');
@@ -25,6 +24,7 @@ router.use(async (req, res, next) => {
                 if (refreshToken) {
                     try {
                         const newAccessToken = await refreshAccess(refreshToken);
+                     //   throw new Error('TokenExpiredError');
                         if (newAccessToken && typeof newAccessToken === 'string') {
                             console.log('add new access token');
                             res.cookie('jwt', newAccessToken, { httpOnly: true });
@@ -35,7 +35,11 @@ router.use(async (req, res, next) => {
                             }
                         }
                     } catch (refreshErr) {
-                        console.error('Error refreshing access token:', refreshErr);
+                        if(refreshErr.name==='TokenExpiredError'){
+                            console.log('clear refresh token');
+                            res.clearCookie('refreshJwt');
+                            req.user=null;
+                        }
                     }
                 }
             } else {

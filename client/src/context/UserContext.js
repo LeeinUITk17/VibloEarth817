@@ -15,6 +15,9 @@ export const UserProvider = ({ children }) => {
                     withCredentials: true  
                 });
                 console.log('Response:', response.data);
+                if(response.data === null){
+                    window.location.href='/login';
+                }
                 setUser(response.data); 
             } catch (error) {
                 console.error('Error fetching user:', error);
